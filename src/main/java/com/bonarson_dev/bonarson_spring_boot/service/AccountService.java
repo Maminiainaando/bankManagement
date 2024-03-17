@@ -28,8 +28,10 @@ public class AccountService implements AccountRepository {
         Statement statement;
         DbConnection dbConnection = new DbConnection();
         Connection conn = dbConnection.conn_db("wallet_exam");
+        Crud crud = new Crud();
+       String dateTimeNow = crud.read_heure_now(conn,"now()");
         try {
-            String query = String.format("insert into account(name,lastname,birthdate,balance,account_number,bank_type)values('%s','%s','%s','%s','%s','%s');",account.getName(),account.getLastname(),account.getBirthDate(),0,account.getAccountNumber(),account.getBankType());
+            String query = String.format("insert into account(name, lastname, birthdate, balance, date_heure, account_number, bank_type) values ('%s', '%s', '%s', %s, '%s', '%s', '%s');", account.getName(), account.getLastname(), account.getBirthDate(), 0, dateTimeNow, account.getAccountNumber(), account.getBankType());
             statement = conn.createStatement();
             statement.executeUpdate(query);
 
@@ -48,7 +50,7 @@ public class AccountService implements AccountRepository {
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery("select * from account ")) {
             while (resultSet.next()) {
-                accounts.add(new Account(resultSet.getString("name"), resultSet.getString("lastname"), resultSet.getString("birthdate"), resultSet.getFloat("balance"),resultSet.getString("account_number"),resultSet.getString("bank_type")));
+                accounts.add(new Account(resultSet.getString("name"), resultSet.getString("lastname"), resultSet.getString("birthdate"),resultSet.getFloat("balance"),resultSet.getString("date_heure"),resultSet.getString("account_number"),resultSet.getString("bank_type")));
             }
 
         } catch (SQLException e) {

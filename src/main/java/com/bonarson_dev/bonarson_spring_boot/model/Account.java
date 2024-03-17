@@ -5,17 +5,23 @@ public class Account {
     private String lastname;
     private String birthDate;
     private float balance;
+    private String date_heure;
 
     private String accountNumber;
     private String bankType;
 
-    public Account(String name, String lastname, String birthDate, float balance, String accountNumber, String bankType) {
+    public Account(String name, String lastname, String birthDate, float balance, String date_heure, String accountNumber, String bankType) {
         Name = name;
         this.lastname = lastname;
         this.birthDate = birthDate;
         this.balance = balance;
+        this.date_heure = date_heure;
         this.accountNumber = accountNumber;
         this.bankType = bankType;
+    }
+
+    public String getDate_heure() {
+        return date_heure;
     }
 
     public String getName() {
