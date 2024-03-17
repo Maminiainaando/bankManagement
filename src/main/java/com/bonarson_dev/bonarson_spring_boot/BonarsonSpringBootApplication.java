@@ -17,7 +17,7 @@ public class BonarsonSpringBootApplication {
 
         DatabaseConfig databaseConfig = new DatabaseConfig();
         DbConnection dbConnection = new DbConnection();
-        dbConnection.conn_db("wallet");
+        dbConnection.conn_db("wallet_exam");
 
 
     }

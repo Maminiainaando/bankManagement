@@ -2,16 +2,16 @@ package com.bonarson_dev.bonarson_spring_boot.model;
 
 public class Account {
     private String Name;
-    private String firstName;
+    private String lastname;
     private String birthDate;
     private float balance;
 
     private String accountNumber;
     private String bankType;
 
-    public Account(String name, String firstName, String birthDate, float balance, String accountNumber, String bankType) {
+    public Account(String name, String lastname, String birthDate, float balance, String accountNumber, String bankType) {
         Name = name;
-        this.firstName = firstName;
+        this.lastname = lastname;
         this.birthDate = birthDate;
         this.balance = balance;
         this.accountNumber = accountNumber;
@@ -26,13 +26,15 @@ public class Account {
         Name = name;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
+
+
 
     public String getBirthDate() {
         return birthDate;
@@ -70,7 +72,7 @@ public class Account {
     public String toString() {
         return "Account{" +
                 "Name='" + Name + '\'' +
-                ", firstName='" + firstName + '\'' +
+                ", firstName='" + lastname + '\'' +
                 ", birthDate='" + birthDate + '\'' +
                 ", balance=" + balance +
                 ", accountNumber='" + accountNumber + '\'' +

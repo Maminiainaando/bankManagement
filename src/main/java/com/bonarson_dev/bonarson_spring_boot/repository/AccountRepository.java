@@ -1,12 +1,10 @@
 package com.bonarson_dev.bonarson_spring_boot.repository;
 
 import com.bonarson_dev.bonarson_spring_boot.model.Account;
-import com.bonarson_dev.bonarson_spring_boot.service.AccountService;
 
-public class AccountRepository implements AccountService {
+import java.util.List;
 
-    @Override
-    public void addAccount(int id, Account account) {
-        
-    }
+public interface AccountRepository {
+    void addPerson(int id, Account account);
+    List<Account> getAllAccount();
 }
