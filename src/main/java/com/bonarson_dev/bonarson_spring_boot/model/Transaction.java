@@ -1,6 +1,7 @@
 package com.bonarson_dev.bonarson_spring_boot.model;
 
 public class Transaction {
+    private int  id_transaction;
     private String label;
     private float transactionAmount;
     private String bankType;
@@ -12,7 +13,8 @@ public class Transaction {
     private String status;
 
 
-    public Transaction(String label, float transactionAmount, String bankType, String dateEffect, String dateRegistration, String transactionType, int idAccount, int idTransfer, String status) {
+    public Transaction(int id_transaction, String label, float transactionAmount, String bankType, String dateEffect, String dateRegistration, String transactionType, int idAccount, int idTransfer, String status) {
+        this.id_transaction = id_transaction;
         this.label = label;
         this.transactionAmount = transactionAmount;
         this.bankType = bankType;
@@ -22,6 +24,14 @@ public class Transaction {
         this.idAccount = idAccount;
         this.idTransfer = idTransfer;
         this.status = status;
+    }
+
+    public int getId_transaction() {
+        return id_transaction;
+    }
+
+    public void setId_transaction(int id_transaction) {
+        this.id_transaction = id_transaction;
     }
 
     public String getLabel() {

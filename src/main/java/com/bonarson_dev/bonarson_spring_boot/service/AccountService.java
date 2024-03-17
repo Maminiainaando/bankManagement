@@ -29,7 +29,7 @@ public class AccountService implements AccountRepository {
         DbConnection dbConnection = new DbConnection();
         Connection conn = dbConnection.conn_db("wallet_exam");
         Crud crud = new Crud();
-       String dateTimeNow = crud.read_heure_now(conn,"now()");
+       String dateTimeNow = crud.readTimeNow(conn,"now()");
         try {
             String query = String.format("insert into account(name, lastname, birthdate, balance, date_heure, account_number, bank_type) values ('%s', '%s', '%s', %s, '%s', '%s', '%s');", account.getName(), account.getLastname(), account.getBirthDate(), 0, dateTimeNow, account.getAccountNumber(), account.getBankType());
             statement = conn.createStatement();

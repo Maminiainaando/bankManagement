@@ -2,9 +2,11 @@ package com.bonarson_dev.bonarson_spring_boot;
 
 import com.bonarson_dev.bonarson_spring_boot.dao.DatabaseConfig;
 import com.bonarson_dev.bonarson_spring_boot.dao.DbConnection;
+import com.bonarson_dev.bonarson_spring_boot.service.Crud;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 
@@ -17,7 +19,9 @@ public class BonarsonSpringBootApplication {
 
         DatabaseConfig databaseConfig = new DatabaseConfig();
         DbConnection dbConnection = new DbConnection();
-        dbConnection.conn_db("wallet_exam");
+        Connection conn =dbConnection.conn_db("wallet_exam");
+        Crud crud = new Crud();
+        System.out.println(crud.readBalanceById(conn, 1));
 
 
     }
