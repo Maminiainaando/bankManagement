@@ -2,7 +2,6 @@ package com.bonarson_dev.bonarson_spring_boot.service;
 
 import com.bonarson_dev.bonarson_spring_boot.dao.DbConnection;
 import com.bonarson_dev.bonarson_spring_boot.model.Account;
-import com.bonarson_dev.bonarson_spring_boot.model.Transaction;
 import com.bonarson_dev.bonarson_spring_boot.repository.AccountRepository;
 import org.springframework.stereotype.Service;
 
@@ -58,5 +57,52 @@ public class AccountService implements AccountRepository {
         }
         return accounts;
     }
+
+    @Override
+    public List<Account> getBalanceNow(int id) {
+        List<Account> account = new ArrayList<>();
+        Statement statement;
+        ResultSet rs = null;
+        DbConnection dbConnection = new DbConnection();
+        Connection conn = dbConnection.conn_db("wallet_exam");
+        Crud crud = new Crud();
+        String timeNow = crud.readTimeNow(conn,"now()");
+        float balance = crud.readBalanceById(conn,id);
+        String timeLast = crud.readTimeById(conn, id);
+        String hTimeLast = timeLast;
+
+        try {
+
+
+            String query3 = String.format("update account  set  date_heure='%s' where    date_heure='%s'", timeNow, timeLast);
+            statement = conn.createStatement();
+            statement.executeUpdate(query3);
+            System.out.println("update account date_time ok  ✔ ");
+
+
+            String query = String.format(" select * from account where id_account='%s'  ", id);
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()){
+
+                account.add(new Account(rs.getString("name"),rs.getString("lastname"),rs.getString("birthdate"),rs.getFloat("balance"),rs.getString("date_heure"),rs.getString("account_number"),rs.getString("bank_type")));
+                System.out.println("select account ok ✔ ");
+            }
+
+
+            String query1 = String.format("update account  set  date_heure='%s' where    date_heure='%s'",hTimeLast, timeNow);
+            statement = conn.createStatement();
+            statement.executeUpdate(query1);
+            System.out.println("update account date_time ok  ✔ ");
+
+
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
+        return account;
+    }
+
+
 }
 

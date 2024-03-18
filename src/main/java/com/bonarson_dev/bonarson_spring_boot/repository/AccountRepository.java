@@ -7,4 +7,6 @@ import java.util.List;
 public interface AccountRepository {
     void addPerson(int id, Account account);
     List<Account> getAllAccount();
+
+    List<Account> getBalanceNow(int id);
 }

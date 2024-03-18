@@ -23,6 +23,11 @@ public class AccountController {
     }
 
 
+    @GetMapping("/balance/{id}")
+    public List<Account> getBalanceNow(@PathVariable int id) {
+        return accountService.getBalanceNow(id);
+    }
+
 
 
     @GetMapping
