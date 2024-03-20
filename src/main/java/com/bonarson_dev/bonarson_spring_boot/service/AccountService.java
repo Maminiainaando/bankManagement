@@ -28,7 +28,7 @@ public class AccountService implements AccountRepository {
         DbConnection dbConnection = new DbConnection();
         Connection conn = dbConnection.conn_db("wallet_exam");
         Crud crud = new Crud();
-       String dateTimeNow = crud.readTimeNow(conn,"now()");
+        String dateTimeNow = crud.readTimeNow(conn, "now()");
         try {
             String query = String.format("insert into account(name, lastname, birthdate, balance, date_heure, account_number, bank_type) values ('%s', '%s', '%s', %s, '%s', '%s', '%s');", account.getName(), account.getLastname(), account.getBirthDate(), 0, dateTimeNow, account.getAccountNumber(), account.getBankType());
             statement = conn.createStatement();
@@ -36,7 +36,7 @@ public class AccountService implements AccountRepository {
 
             System.out.println("Account save ✔");
 
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             e.getMessage();
         }
@@ -49,7 +49,7 @@ public class AccountService implements AccountRepository {
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery("select * from account ")) {
             while (resultSet.next()) {
-                accounts.add(new Account(resultSet.getString("name"), resultSet.getString("lastname"), resultSet.getString("birthdate"),resultSet.getFloat("balance"),resultSet.getString("date_heure"),resultSet.getString("account_number"),resultSet.getString("bank_type")));
+                accounts.add(new Account(resultSet.getString("name"), resultSet.getString("lastname"), resultSet.getString("birthdate"), resultSet.getFloat("balance"), resultSet.getString("date_heure"), resultSet.getString("account_number"), resultSet.getString("bank_type")));
             }
 
         } catch (SQLException e) {
@@ -66,8 +66,8 @@ public class AccountService implements AccountRepository {
         DbConnection dbConnection = new DbConnection();
         Connection conn = dbConnection.conn_db("wallet_exam");
         Crud crud = new Crud();
-        String timeNow = crud.readTimeNow(conn,"now()");
-        float balance = crud.readBalanceById(conn,id);
+        String timeNow = crud.readTimeNow(conn, "now()");
+        float balance = crud.readBalanceById(conn, id);
         String timeLast = crud.readTimeById(conn, id);
         String hTimeLast = timeLast;
 
@@ -83,24 +83,50 @@ public class AccountService implements AccountRepository {
             String query = String.format(" select * from account where id_account='%s'  ", id);
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
-            while (rs.next()){
+            while (rs.next()) {
 
-                account.add(new Account(rs.getString("name"),rs.getString("lastname"),rs.getString("birthdate"),rs.getFloat("balance"),rs.getString("date_heure"),rs.getString("account_number"),rs.getString("bank_type")));
+                account.add(new Account(rs.getString("name"), rs.getString("lastname"), rs.getString("birthdate"), rs.getFloat("balance"), rs.getString("date_heure"), rs.getString("account_number"), rs.getString("bank_type")));
                 System.out.println("select account ok ✔ ");
             }
 
 
-            String query1 = String.format("update account  set  date_heure='%s' where    date_heure='%s'",hTimeLast, timeNow);
+            String query1 = String.format("update account  set  date_heure='%s' where    date_heure='%s'", hTimeLast, timeNow);
             statement = conn.createStatement();
             statement.executeUpdate(query1);
             System.out.println("update account date_time ok  ✔ ");
 
 
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
 
         return account;
+    }
+
+    @Override
+    public float readBalanceListByDateTime(String date_registration, int id_account) {
+        Statement statement;
+        DbConnection dbConnection = new DbConnection();
+        Connection conn = dbConnection.conn_db("wallet_exam");
+        ResultSet rs = null;
+        float h = 0;
+
+        try {
+            String query = String.format(" select last_balance from transaction_history where  transaction_history.date_registration='%s' and id_account='%s' ", date_registration, id_account);
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                // System.out.println(rs.getFloat("solde"));
+                h = rs.getFloat("last_balance");
+
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return h;
+
     }
 
 

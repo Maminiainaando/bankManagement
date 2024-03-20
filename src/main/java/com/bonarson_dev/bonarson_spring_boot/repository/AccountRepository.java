@@ -9,4 +9,5 @@ public interface AccountRepository {
     List<Account> getAllAccount();
 
     List<Account> getBalanceNow(int id);
+    float readBalanceListByDateTime(String  date_registration ,int id_account);
 }

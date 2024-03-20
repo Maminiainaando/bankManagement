@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/account")
 
 public class AccountController {
-    private final AccountService accountService ;
+    private final AccountService accountService;
 
 
     @Autowired
@@ -28,6 +28,10 @@ public class AccountController {
         return accountService.getBalanceNow(id);
     }
 
+    @GetMapping("/{id_account}/{date_registration}")
+    public float readBalanceListByDateTime(@PathVariable String date_registration, @PathVariable int id_account) {
+        return accountService.readBalanceListByDateTime(date_registration, id_account);
+    }
 
 
     @GetMapping
@@ -36,8 +40,8 @@ public class AccountController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Void> addAccount(@RequestBody Account account){
-        accountService.addPerson(1,account);
+    public ResponseEntity<Void> addAccount(@RequestBody Account account) {
+        accountService.addPerson(1, account);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
