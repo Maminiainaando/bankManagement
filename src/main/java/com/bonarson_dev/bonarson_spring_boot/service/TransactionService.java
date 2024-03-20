@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,4 +110,33 @@ public class TransactionService implements TransactionRepository {
         }
         return transactions;
     }
+
+    @Override
+    public List<Transaction> getTransactionById(int id_account) {
+        List<Transaction> transactions = new ArrayList<>();
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM transaction WHERE id_account = ?")) {
+            preparedStatement.setInt(1, id_account);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    transactions.add(new Transaction(
+                            resultSet.getInt("id_transaction"),
+                            resultSet.getString("label"),
+                            resultSet.getFloat("transaction_amount"),
+                            resultSet.getString("bank_type"),
+                            resultSet.getString("date_effect"),
+                            resultSet.getString("date_registration"),
+                            resultSet.getString("transaction_type"),
+                            resultSet.getInt("id_account"),
+                            resultSet.getInt("id_transfer"),
+                            resultSet.getString("status")
+                    ));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return transactions;
+    }
+
 }

@@ -24,6 +24,13 @@ public class TransactionController {
         return transactionService.getAllTransaction();
     }
 
+    @GetMapping("/{id_account}")
+    public ResponseEntity<List<Transaction>> getTransactionsById(@PathVariable int id_account) {
+        List<Transaction> transactions = transactionService.getTransactionById(id_account);
+        return transactions != null && !transactions.isEmpty() ? new ResponseEntity<>(transactions, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+
     @PostMapping("/{transaction_type}/{id_account}")
     public ResponseEntity<Void> saveTransaction(@RequestBody Transaction transaction, @PathVariable String transaction_type, @PathVariable int id_account) {
         if (!transaction_type.equals("credit") && !transaction_type.equals("debit")) {

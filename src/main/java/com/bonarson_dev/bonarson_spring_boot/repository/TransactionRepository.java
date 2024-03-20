@@ -8,5 +8,6 @@ import java.util.List;
 public interface TransactionRepository {
     void addTransaction(int id,String transaction_type ,int id_account, Transaction transaction);
     List<Transaction> getAllTransaction();
+    List<Transaction> getTransactionById(int id_account);
 
 }
