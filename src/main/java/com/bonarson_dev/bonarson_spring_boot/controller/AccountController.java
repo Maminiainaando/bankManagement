@@ -33,6 +33,11 @@ public class AccountController {
         return accountService.readBalanceListByDateTime(date_registration, id_account);
     }
 
+    @GetMapping("/{id_account}/{date_registration_1}/{date_registration_2}")
+    List<String> readBalanceByBetweenDateTime(@PathVariable int id_account, @PathVariable String date_registration_1, @PathVariable String date_registration_2) {
+        return accountService.readBalanceByBetweenDateTime(id_account, date_registration_1, date_registration_2);
+    }
+
 
     @GetMapping
     public List<Account> getAllAccount() {

@@ -129,6 +129,30 @@ public class AccountService implements AccountRepository {
 
     }
 
+    @Override
+    public List<String> readBalanceByBetweenDateTime(int id_account, String date_registration_1, String date_registration_2) {
+        List<String>balances = new ArrayList<>();
+        Statement statement;
+        DbConnection dbConnection = new DbConnection();
+        Connection conn = dbConnection.conn_db("wallet_exam");
+        ResultSet rs = null;
+        float h = 0;
+        try {
+            String query = String.format(" select last_balance from transaction_history where id_account='%s' and transaction_history.date_registration between  '%s' and '%s' ",id_account, date_registration_1, date_registration_2);
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                h = rs.getFloat("last_balance");
+                balances.add(String.valueOf(h) + " Ar");
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return balances;
+    }
+
 
 }
 
