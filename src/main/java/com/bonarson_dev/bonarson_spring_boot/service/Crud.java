@@ -67,4 +67,42 @@ public class Crud {
 
         return q;
     }
+
+
+    public int idTransaction(Connection conn) {
+        Statement statement;
+        ResultSet rs = null;
+        int id_transaction = 0;
+        try {
+            String query = String.format("select  id_transaction from transaction order by  id_transaction  desc  limit 1;");
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                id_transaction = rs.getInt("id_transaction");
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return id_transaction;
+    }
+
+    public int idTransfer(Connection conn) {
+        Statement statement;
+        ResultSet rs = null;
+        int id_transfer = 0;
+        try {
+            String query = String.format(" select id_transfer from transfer_history order by id_transfer  desc  limit 1;");
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                id_transfer = rs.getInt("id_transfer");
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return id_transfer;
+    }
+
 }

@@ -41,5 +41,17 @@ public class TransactionController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PostMapping("/transfer/{id_account_sender}/{id_account_receive}")
+
+    public ResponseEntity<Void> addTransfer(@RequestBody Transaction transaction, @PathVariable int id_account_sender, @PathVariable int id_account_receive) {
+        if (id_account_sender != id_account_receive) {
+            transactionService.addTransfer(1, transaction, id_account_sender, id_account_receive);
+            transactionService.saveIdTransfer();
+        }else {
+            System.out.println("error transfer");
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
 }
