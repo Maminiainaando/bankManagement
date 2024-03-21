@@ -23,7 +23,7 @@ public class TransactionController {
     }
 
     @GetMapping
-    public List<Transaction> getAllPersons() {
+    public List<Transaction> getAllTransaction() {
         return transactionService.getAllTransaction();
     }
 
