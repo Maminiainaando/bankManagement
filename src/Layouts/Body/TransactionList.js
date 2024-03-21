@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import ButtonAppBar from '../NavBar/Nav';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -41,36 +42,42 @@ function TransactionList() {
   }, []);
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell align="center">ID de transaction</StyledTableCell>
-            <StyledTableCell align="center">Libellé</StyledTableCell>
-            <StyledTableCell align="center">Montant</StyledTableCell>
-            <StyledTableCell align="center">Type de transaction</StyledTableCell>
-            <StyledTableCell align="center">Date d'effet</StyledTableCell>
-            <StyledTableCell align="center">Date d'enregistrement</StyledTableCell>
-            <StyledTableCell align="center">Statut</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {transactions.map((transaction) => (
-            <StyledTableRow key={transaction.id_transaction}>
-              <StyledTableCell component="th" scope="row" align="center">
-                {transaction.id_transaction}
-              </StyledTableCell>
-              <StyledTableCell align="center">{transaction.label}</StyledTableCell>
-              <StyledTableCell align="center">{transaction.transactionAmount}</StyledTableCell>
-              <StyledTableCell align="center">{transaction.transactionType}</StyledTableCell>
-              <StyledTableCell align="center">{transaction.dateEffect}</StyledTableCell>
-              <StyledTableCell align="center">{transaction.dateRegistration}</StyledTableCell>
-              <StyledTableCell align="center">{transaction.status}</StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div>
+      <ButtonAppBar />
+      <header className="Title">
+        <h1>Transaction</h1>
+      </header>
+      <TableContainer sx={{ marginTop: '5vh', minWidth: '90vw' }} component={Paper}>
+        <Table sx={{}} aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell align="center">ID de transaction</StyledTableCell>
+              <StyledTableCell align="center">Libellé</StyledTableCell>
+              <StyledTableCell align="center">Montant</StyledTableCell>
+              <StyledTableCell align="center">Type de transaction</StyledTableCell>
+              <StyledTableCell align="center">Date d'effet</StyledTableCell>
+              <StyledTableCell align="center">Date d'enregistrement</StyledTableCell>
+              <StyledTableCell align="center">Statut</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {transactions.map((transaction) => (
+              <StyledTableRow key={transaction.id_transaction}>
+                <StyledTableCell component="th" scope="row" align="center">
+                  {transaction.id_transaction}
+                </StyledTableCell>
+                <StyledTableCell align="center">{transaction.label}</StyledTableCell>
+                <StyledTableCell align="center">{transaction.transactionAmount}</StyledTableCell>
+                <StyledTableCell align="center">{transaction.transactionType}</StyledTableCell>
+                <StyledTableCell align="center">{transaction.dateEffect}</StyledTableCell>
+                <StyledTableCell align="center">{transaction.dateRegistration}</StyledTableCell>
+                <StyledTableCell align="center">{transaction.status}</StyledTableCell>
+              </StyledTableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 }
 

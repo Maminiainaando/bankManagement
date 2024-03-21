@@ -35,7 +35,7 @@ function AddPersonForm() {
 
     const handleSubmit = async () => {
         try {
-            await axios.post('http://localhost:8080/account', formData);
+            await axios.post('http://localhost:8080/account/add', formData);
             setFormData({
                 name: '',
                 lastname: '',
@@ -54,7 +54,7 @@ function AddPersonForm() {
 
             <div className='form_submit'>
                 <Typography variant="h6" component="h2">
-                    Add Person
+                    Add Account
                 </Typography>
                 <form onSubmit={handleSubmit}>
                     <TextField

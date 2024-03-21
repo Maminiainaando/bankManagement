@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import ButtonAppBar from '../NavBar/Nav';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -42,36 +43,42 @@ function AccountListList() {
   }, []);
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell align="center">name</StyledTableCell>
-            <StyledTableCell align="center">lastname</StyledTableCell>
-            <StyledTableCell align="center">Birthdate</StyledTableCell>
-            <StyledTableCell align="center">BALENCE</StyledTableCell>
-            <StyledTableCell align="center">Date et heure</StyledTableCell>
-            <StyledTableCell align="center">accountnumber</StyledTableCell>
-            <StyledTableCell align='center'>Bank type</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {accounts.map((account) => (
-            <StyledTableRow key={account.id_account}>
-              <StyledTableCell component="th" scope="row">
-                {account.id_account}
-              </StyledTableCell>
-              <StyledTableCell align="center">{account.name}</StyledTableCell>
-              <StyledTableCell align="center">{account.birthdate}</StyledTableCell>
-              <StyledTableCell align="center">{account.balance} Ar</StyledTableCell>
-              <StyledTableCell align="center">{account.date_heure}</StyledTableCell>
-              <StyledTableCell align="center">{account.accountnumber}</StyledTableCell>
-              <StyledTableCell align="center">{account.banktype}</StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div>
+      <ButtonAppBar sx={{}} />
+      <header className="Title">
+        <h1>Account</h1>
+      </header>
+      <TableContainer sx={{ marginTop: '5vh', minWidth: '98vw' }} component={Paper}>
+        <Table sx={{}} aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell align="center">name</StyledTableCell>
+              <StyledTableCell align="center">lastname</StyledTableCell>
+              <StyledTableCell align="center">Birthdate</StyledTableCell>
+              <StyledTableCell align="center">BALENCE</StyledTableCell>
+              <StyledTableCell align="center">Date et heure</StyledTableCell>
+              <StyledTableCell align="center">accountnumber</StyledTableCell>
+              <StyledTableCell align='center'>Bank type</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {accounts.map((account) => (
+              <StyledTableRow key={account.id_account}>
+                <StyledTableCell component="th" scope="row">
+                  {account.id_account}
+                </StyledTableCell>
+                <StyledTableCell align="center">{account.name}</StyledTableCell>
+                <StyledTableCell align="center">{account.birthdate}</StyledTableCell>
+                <StyledTableCell align="center">{account.balance} Ar</StyledTableCell>
+                <StyledTableCell align="center">{account.date_heure}</StyledTableCell>
+                <StyledTableCell align="center">{account.accountnumber}</StyledTableCell>
+                <StyledTableCell align="center">{account.banktype}</StyledTableCell>
+              </StyledTableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 }
 
