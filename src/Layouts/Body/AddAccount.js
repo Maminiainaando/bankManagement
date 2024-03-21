@@ -7,7 +7,7 @@ function AddPersonForm() {
     const [formData, setFormData] = useState({
         name: '',
         lastname: '',
-        birthdate: '',
+        birthDate: '',
         accountNumber: '',
         bankType: '',
     });
@@ -39,7 +39,7 @@ function AddPersonForm() {
             setFormData({
                 name: '',
                 lastname: '',
-                birthdate: '',
+                birthDate: '',
                 accountNumber: '',
                 bankType: '',
             });
@@ -62,9 +62,9 @@ function AddPersonForm() {
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
-                        required // Add required prop for validation
-                        fullWidth // Make the field span the full width
-                        margin="normal" // Add spacing for a cleaner layout
+                        required
+                        fullWidth 
+                        margin="normal"
                     />
                     <TextField
                         label="Lastname"
@@ -77,8 +77,8 @@ function AddPersonForm() {
                     />
                     <TextField
                         label="Birthdate"
-                        name="birthdate"
-                        value={formData.birthdate}
+                        name="birthDate"
+                        value={formData.birthDate}
                         onChange={handleChange}
                         fullWidth
                         margin="normal"
