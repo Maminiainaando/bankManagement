@@ -23,7 +23,7 @@ public class AccountService implements AccountRepository {
     }
 
     @Override
-    public void addPerson(int id, Account account) {
+    public void addAccount(int id, Account account) {
         Statement statement;
         DbConnection dbConnection = new DbConnection();
         Connection conn = dbConnection.conn_db("wallet_exam");

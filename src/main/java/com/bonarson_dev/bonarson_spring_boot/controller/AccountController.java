@@ -46,7 +46,7 @@ public class AccountController {
 
     @PostMapping("/add")
     public ResponseEntity<Void> addAccount(@RequestBody Account account) {
-        accountService.addPerson(1, account);
+        accountService.addAccount(1, account);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

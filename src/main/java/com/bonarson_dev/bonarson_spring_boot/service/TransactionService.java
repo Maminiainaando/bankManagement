@@ -74,11 +74,10 @@ public class TransactionService implements TransactionRepository {
                 statement.executeUpdate(query1);
                 System.out.println("update account balance ok  ✔ ");
 
-
                 String query3 = String.format("update account  set  date_heure='%s' where    date_heure='%s'", dateTimeNow, timeById);
                 statement = conn.createStatement();
                 statement.executeUpdate(query3);
-                System.out.println("update account date_heure ok  ✔ ");
+                System.out.println("update account date_time ok  ✔ ");
 
                 String query2 = String.format("insert into transaction_history(last_balance,date_registration,id_account) values('%s','%s','%s');", balanceNow, timeById, id_account);
                 statement = conn.createStatement();
