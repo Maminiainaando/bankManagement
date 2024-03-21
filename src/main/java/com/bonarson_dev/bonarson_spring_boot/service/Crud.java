@@ -45,6 +45,24 @@ public class Crud {
 
         return h;
     }
+    public String readAccountNumber(Connection conn,int idAccount){
+        Statement statement;
+        ResultSet rs = null;
+        String accountNumber = " ";
+        try{
+            String query = String.format(" select account_number from account where id_account='%s' ", idAccount);
+             statement = conn.createStatement();
+             rs= statement.executeQuery(query);
+             while (rs.next()){
+                 accountNumber =rs.getString("account_number");
+             }
+
+        }catch (Exception e){
+            System.out.println(e);
+            e.getMessage();
+        }
+        return accountNumber;
+    }
 
     //pour obtenir le solde account par id
 
@@ -66,6 +84,25 @@ public class Crud {
         }
 
         return q;
+    }
+
+    public int readIdAccount(Connection conn , String accountNumber){
+        Statement statement;
+        ResultSet rs = null;
+        int id =0;
+        try{
+            String query = String.format(" select id_account from account where  account_number='%s' ",  accountNumber);
+            statement = conn.createStatement();
+            rs= statement.executeQuery(query);
+            while (rs.next()){
+                id=rs.getInt("id_account");
+            }
+
+        }catch (Exception e){
+            System.out.println(e);
+            e.getMessage();
+        }
+        return id;
     }
 
 
@@ -104,5 +141,7 @@ public class Crud {
         }
         return id_transfer;
     }
+
+
 
 }
