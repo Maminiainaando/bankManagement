@@ -17,6 +17,10 @@
   color: white;
 }
 
+.Title{
+  margin-top: 10vh;
+}
+
 .entete img {
   width: 100px;
 }

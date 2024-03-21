@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import Link from '@mui/material/Link';
+
 const Components = () => {
   const [fonctionnaliteActive, setFonctionnaliteActive] = useState('paiement-facture');
 
@@ -10,7 +12,7 @@ const Components = () => {
   return (
     <div className="app">
       <Entete />
-      <Solde/>
+      <Solde />
       <MenuPrincipal
         fonctionnaliteActive={fonctionnaliteActive}
         onFonctionnaliteClick={handleFonctionnaliteClick}
@@ -30,12 +32,12 @@ const Entete = () => {
   );
 };
 
- const Solde= () => {
+const Solde = () => {
   return (
     <section className="solde-mvola">
-      <p>Total Balance</p>
+      <p>Total of your Balance :</p>
       <h2>4 676 152 Ar</h2>
-      <hr/>
+      <hr />
     </section>
   );
 };
@@ -66,25 +68,36 @@ const MenuPrincipal = ({ fonctionnaliteActive, onFonctionnaliteClick }) => {
 
   return (
     <nav className="menu-principal">
-      {fonctionnalites.map((fonctionnalite) => (
-        <button
-          key={fonctionnalite.id}
-          className={fonctionnaliteActive === fonctionnalite.id ? 'active' : ''}
-          onClick={() => onFonctionnaliteClick(fonctionnalite.id)}
-        >
-          {fonctionnalite.label}
-        </button>
-      ))}
+      <button>
+        <Link href="Account" underline="none" color={"black"}>
+          {"Account List"}
+        </Link>
+      </button>
+      <button>
+        <Link href="Transaction" underline="none" color={"black"}>
+          {"Transaction List"}
+        </Link>
+      </button>
+      <button>
+        <Link href="Transaction" underline="none" color={"black"}>
+          {"Transaction List"}
+        </Link>
+      </button>
+      <button>
+        <Link href="AddPerson" underline="none" color={"black"}>
+          {"Add account"}
+        </Link>
+      </button>
     </nav>
   );
 };
 
 const Table = () => {
-    return(
-        <div>
-            
-        </div>
-    );
+  return (
+    <div>
+
+    </div>
+  );
 };
 
 const SectionFonctionnalite = ({ fonctionnaliteActive }) => {
