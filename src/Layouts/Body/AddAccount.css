@@ -1,0 +1,14 @@
+.form_submit{
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
