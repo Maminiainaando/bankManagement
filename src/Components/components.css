@@ -1,0 +1,12 @@
+.find{
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+}
+
+.obtain {
+    border: none;
+    height: 6vh;
+    width: 10vw;
+    border-radius: 4px;
+}
