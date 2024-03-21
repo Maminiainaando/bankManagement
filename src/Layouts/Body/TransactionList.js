@@ -8,6 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import ButtonAppBar from '../NavBar/Nav';
+import Link from '@mui/material/Link';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -52,9 +53,9 @@ function TransactionList() {
           <TableHead>
             <TableRow>
               <StyledTableCell align="center">ID de transaction</StyledTableCell>
-              <StyledTableCell align="center">Libellé</StyledTableCell>
-              <StyledTableCell align="center">Montant</StyledTableCell>
-              <StyledTableCell align="center">Type de transaction</StyledTableCell>
+              <StyledTableCell align="center">Label</StyledTableCell>
+              <StyledTableCell align="center">Amount</StyledTableCell>
+              <StyledTableCell align="center">Transaction Type</StyledTableCell>
               <StyledTableCell align="center">Date d'effet</StyledTableCell>
               <StyledTableCell align="center">Date d'enregistrement</StyledTableCell>
               <StyledTableCell align="center">Statut</StyledTableCell>
@@ -67,7 +68,7 @@ function TransactionList() {
                   {transaction.id_transaction}
                 </StyledTableCell>
                 <StyledTableCell align="center">{transaction.label}</StyledTableCell>
-                <StyledTableCell align="center">{transaction.transactionAmount}</StyledTableCell>
+                <StyledTableCell align="center">{transaction.transactionAmount} Ar</StyledTableCell>
                 <StyledTableCell align="center">{transaction.transactionType}</StyledTableCell>
                 <StyledTableCell align="center">{transaction.dateEffect}</StyledTableCell>
                 <StyledTableCell align="center">{transaction.dateRegistration}</StyledTableCell>
