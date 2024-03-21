@@ -54,7 +54,7 @@ function AccountListList() {
             <TableRow>
               <StyledTableCell align="center">name</StyledTableCell>
               <StyledTableCell align="center">lastname</StyledTableCell>
-              <StyledTableCell align="center">Birthdate</StyledTableCell>
+              <StyledTableCell align="center">birthDate</StyledTableCell>
               <StyledTableCell align="center">BALENCE</StyledTableCell>
               <StyledTableCell align="center">Date et heure</StyledTableCell>
               <StyledTableCell align="center">accountnumber</StyledTableCell>
@@ -64,15 +64,13 @@ function AccountListList() {
           <TableBody>
             {accounts.map((account) => (
               <StyledTableRow key={account.id_account}>
-                <StyledTableCell component="th" scope="row">
-                  {account.id_account}
-                </StyledTableCell>
                 <StyledTableCell align="center">{account.name}</StyledTableCell>
-                <StyledTableCell align="center">{account.birthdate}</StyledTableCell>
+                <StyledTableCell align="center">{account.lastname}</StyledTableCell>
+                <StyledTableCell align="center">{account.birthDate}</StyledTableCell>
                 <StyledTableCell align="center">{account.balance} Ar</StyledTableCell>
                 <StyledTableCell align="center">{account.date_heure}</StyledTableCell>
-                <StyledTableCell align="center">{account.accountnumber}</StyledTableCell>
-                <StyledTableCell align="center">{account.banktype}</StyledTableCell>
+                <StyledTableCell align="center">{account.accountNumber}</StyledTableCell>
+                <StyledTableCell align="center">{account.bankType}</StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>
