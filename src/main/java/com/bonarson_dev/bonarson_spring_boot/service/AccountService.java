@@ -30,7 +30,7 @@ public class AccountService implements AccountRepository {
         Crud crud = new Crud();
         String dateTimeNow = crud.readTimeNow(conn, "now()");
         try {
-            String query = String.format("insert into account(name, lastname, birthdate, balance, date_heure, account_number, bank_type) values ('%s', '%s', '%s', %s, '%s', '%s', '%s');", account.getName(), account.getLastname(), account.getBirthDate(), 0, dateTimeNow, account.getAccountNumber(), account.getBankType());
+            String query = String.format("insert into account(name, lastname, birthdate, balance, date_heure, account_number, bank_type,password) values ('%s', '%s', '%s', %s, '%s', '%s', '%s','%s');", account.getName(), account.getLastname(), account.getBirthDate(), 0, dateTimeNow, account.getAccountNumber(), account.getBankType(),account.getPassword());
             statement = conn.createStatement();
             statement.executeUpdate(query);
 
@@ -49,7 +49,7 @@ public class AccountService implements AccountRepository {
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery("select * from account ")) {
             while (resultSet.next()) {
-                accounts.add(new Account(resultSet.getString("name"), resultSet.getString("lastname"), resultSet.getString("birthdate"), resultSet.getFloat("balance"), resultSet.getString("date_heure"), resultSet.getString("account_number"), resultSet.getString("bank_type")));
+                accounts.add(new Account(resultSet.getString("name"), resultSet.getString("lastname"), resultSet.getString("birthdate"), resultSet.getFloat("balance"), resultSet.getString("date_heure"), resultSet.getString("account_number"), resultSet.getString("bank_type"),resultSet.getString("password")));
             }
 
         } catch (SQLException e) {
@@ -85,7 +85,7 @@ public class AccountService implements AccountRepository {
             rs = statement.executeQuery(query);
             while (rs.next()) {
 
-                account.add(new Account(rs.getString("name"), rs.getString("lastname"), rs.getString("birthdate"), rs.getFloat("balance"), rs.getString("date_heure"), rs.getString("account_number"), rs.getString("bank_type")));
+                account.add(new Account(rs.getString("name"), rs.getString("lastname"), rs.getString("birthdate"), rs.getFloat("balance"), rs.getString("date_heure"), rs.getString("account_number"), rs.getString("bank_type"),rs.getString("password")));
                 System.out.println("select account ok ✔ ");
             }
 
@@ -152,7 +152,5 @@ public class AccountService implements AccountRepository {
         }
         return balances;
     }
-
-
 }
 

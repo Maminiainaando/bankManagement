@@ -2,6 +2,7 @@ package com.bonarson_dev.bonarson_spring_boot.repository;
 
 import com.bonarson_dev.bonarson_spring_boot.model.Account;
 
+import java.sql.Connection;
 import java.util.List;
 
 public interface AccountRepository {

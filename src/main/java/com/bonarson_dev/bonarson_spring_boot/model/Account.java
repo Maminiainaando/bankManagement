@@ -9,8 +9,9 @@ public class Account {
 
     private String accountNumber;
     private String bankType;
+    private String password;
 
-    public Account(String name, String lastname, String birthDate, float balance, String date_heure, String accountNumber, String bankType) {
+    public Account(String name, String lastname, String birthDate, float balance, String date_heure, String accountNumber, String bankType, String password) {
         Name = name;
         this.lastname = lastname;
         this.birthDate = birthDate;
@@ -18,6 +19,19 @@ public class Account {
         this.date_heure = date_heure;
         this.accountNumber = accountNumber;
         this.bankType = bankType;
+        this.password = password;
+    }
+
+    public void setDate_heure(String date_heure) {
+        this.date_heure = date_heure;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getDate_heure() {
