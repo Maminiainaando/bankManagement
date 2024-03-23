@@ -1,27 +1,27 @@
 package com.bonarson_dev.bonarson_spring_boot.model;
 
 public class LoginForm {
-    private int id_account;
-    private String account_number;
+    private String name;
+    private String password;
 
-    public LoginForm(int id_account, String account_number) {
-        this.id_account = id_account;
-        this.account_number = account_number;
+    public LoginForm(String name, String password) {
+        this.name = name;
+        this.password = password;
     }
 
-    public int getId_account() {
-        return id_account;
+    public String getName() {
+        return name;
     }
 
-    public void setId_account(int id_account) {
-        this.id_account = id_account;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getAccount_number() {
-        return account_number;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAccount_number(String account_number) {
-        this.account_number = account_number;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

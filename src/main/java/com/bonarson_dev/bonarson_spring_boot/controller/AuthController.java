@@ -24,11 +24,11 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginForm loginForm) {
-        int idAccount = loginForm.getId_account();
-        String accountNumber = loginForm.getAccount_number();
+        String name = loginForm.getName();
+        String password = loginForm.getPassword();
 
         try (Connection connection = dataSource.getConnection()) {
-            if (loginFormRepository.authenticateAccount(idAccount, accountNumber, connection)) {
+            if (loginFormRepository.authenticateAccount(name,password, connection)) {
                 return ResponseEntity.ok("Information correct");
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(" bad Information ");

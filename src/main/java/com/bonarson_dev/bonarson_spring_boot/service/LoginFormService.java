@@ -13,15 +13,15 @@ import java.sql.SQLException;
 public class LoginFormService implements LoginFormRepository {
 
     @Override
-    public boolean authenticateAccount(int id_account, String account_number, Connection connection) {
-        String query = "SELECT * FROM account WHERE id_account = ?";
+    public boolean authenticateAccount(String name , String password, Connection connection) {
+        String query = "SELECT * FROM account WHERE name = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, id_account);
+            preparedStatement.setString(1,name);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    return account_number.equals(resultSet.getString("account_number"));
+                    return password.equals(resultSet.getString("password"));
                 }
             }
         } catch (SQLException e) {
