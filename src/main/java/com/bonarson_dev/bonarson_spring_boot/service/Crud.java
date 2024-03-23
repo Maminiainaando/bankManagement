@@ -45,6 +45,26 @@ public class Crud {
 
         return h;
     }
+    public String readTimeByPassword(Connection conn,  String password) {
+        Statement statement;
+        ResultSet rs = null;
+        String h = " ";
+        try {
+            String query = String.format(" select date_heure from account where  password='%s' ", password);
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                // System.out.println(rs.getFloat("solde"));
+                h = rs.getString("date_heure");
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return h;
+    }
     public String readAccountNumber(Connection conn,int idAccount){
         Statement statement;
         ResultSet rs = null;
@@ -72,6 +92,25 @@ public class Crud {
         float q = 0;
         try {
             String query = String.format(" select balance from account where  id_account='%s' ",  idaccount);
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                q = rs.getFloat("balance");
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return q;
+    }
+    public float readBalanceByPassword(Connection conn,  String password) {
+        Statement statement;
+        ResultSet rs = null;
+        float q = 0;
+        try {
+            String query = String.format(" select balance from account where  password='%s' ",password);
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
             while (rs.next()) {

@@ -23,9 +23,9 @@ public class AccountController {
     }
 
 
-    @GetMapping("/balance/{id}")
-    public List<Account> getBalanceNow(@PathVariable int id) {
-        return accountService.getBalanceNow(id);
+    @GetMapping("/balance/{password}")
+    public List<Account> getBalanceNow(@PathVariable String password) {
+        return accountService.getBalanceNow(password);
     }
 
     @GetMapping("/{id_account}/{date_registration}")

@@ -59,7 +59,7 @@ public class AccountService implements AccountRepository {
     }
 
     @Override
-    public List<Account> getBalanceNow(int id) {
+    public List<Account> getBalanceNow(String password) {
         List<Account> account = new ArrayList<>();
         Statement statement;
         ResultSet rs = null;
@@ -67,8 +67,8 @@ public class AccountService implements AccountRepository {
         Connection conn = dbConnection.conn_db("wallet_exam");
         Crud crud = new Crud();
         String timeNow = crud.readTimeNow(conn, "now()");
-        float balance = crud.readBalanceById(conn, id);
-        String timeLast = crud.readTimeById(conn, id);
+        float balance = crud.readBalanceByPassword(conn, password);
+        String timeLast = crud.readTimeByPassword(conn, password);
         String hTimeLast = timeLast;
 
         try {
@@ -80,7 +80,7 @@ public class AccountService implements AccountRepository {
             System.out.println("update account date_time ok  ✔ ");
 
 
-            String query = String.format(" select * from account where id_account='%s'  ", id);
+            String query = String.format(" select * from account where password='%s'  ",password);
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
             while (rs.next()) {

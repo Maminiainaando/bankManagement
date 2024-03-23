@@ -10,7 +10,7 @@ public interface AccountRepository {
 
     List<Account> getAllAccount();
 
-    List<Account> getBalanceNow(int id);
+    List<Account> getBalanceNow(String password);
 
     float readBalanceListByDateTime(String date_registration, int id_account);
 
