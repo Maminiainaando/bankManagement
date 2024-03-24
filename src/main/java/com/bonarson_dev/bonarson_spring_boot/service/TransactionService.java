@@ -89,7 +89,7 @@ public class TransactionService implements TransactionRepository {
                 e.getMessage();
             }
 
-        }else {
+        } else {
             System.out.println("error transaction , use  debit or credit type ");
         }
     }
@@ -101,7 +101,7 @@ public class TransactionService implements TransactionRepository {
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery("select * from transaction ")) {
             while (resultSet.next()) {
-                transactions.add(new Transaction(resultSet.getInt("id_transaction"), resultSet.getString("label"), resultSet.getFloat("transaction_amount"), resultSet.getString("bank_type"), resultSet.getString("date_effect"), resultSet.getString("date_registration"), resultSet.getString("transaction_type"), resultSet.getInt("id_account"), resultSet.getInt("id_transfer"),resultSet.getString("status")));
+                transactions.add(new Transaction(resultSet.getInt("id_transaction"), resultSet.getString("label"), resultSet.getFloat("transaction_amount"), resultSet.getString("bank_type"), resultSet.getString("date_effect"), resultSet.getString("date_registration"), resultSet.getString("transaction_type"), resultSet.getInt("id_account"), resultSet.getInt("id_transfer"), resultSet.getString("status")));
             }
 
         } catch (SQLException e) {
@@ -156,24 +156,24 @@ public class TransactionService implements TransactionRepository {
 
             try {
                 //insert transaction C1
-                String query = String.format("insert into transaction(label,transaction_amount,bank_type,date_effect,date_registration, transaction_type, id_account,id_transfer,status) values('%s','%s','%s','%s','%s','%s','%s','%s','%s');",transaction.getLabel(),transaction.getTransactionAmount(),transaction.getBankType(),dateTimeNow,dateTimeNow,"debit",id_account_sender,transaction.getIdTransfer(),"completed");
+                String query = String.format("insert into transaction(label,transaction_amount,bank_type,date_effect,date_registration, transaction_type, id_account,id_transfer,status) values('%s','%s','%s','%s','%s','%s','%s','%s','%s');", transaction.getLabel(), transaction.getTransactionAmount(), transaction.getBankType(), dateTimeNow, dateTimeNow, "debit", id_account_sender, transaction.getIdTransfer(), "completed");
                 statement = conn.createStatement();
                 statement.executeUpdate(query);
                 System.out.println("transaction ok ✔ ");
 
                 //insert transaction C2
-                String query1 = String.format("insert into transaction(label,transaction_amount,bank_type,date_effect,date_registration, transaction_type, id_account,id_transfer,status) values('%s','%s','%s','%s','%s','%s','%s','%s','%s');",transaction.getLabel(),transaction.getTransactionAmount(),transaction.getBankType(),dateTimeNow,dateTimeNow,"credit",id_account_receive,transaction.getIdTransfer(),"completed");
+                String query1 = String.format("insert into transaction(label,transaction_amount,bank_type,date_effect,date_registration, transaction_type, id_account,id_transfer,status) values('%s','%s','%s','%s','%s','%s','%s','%s','%s');", transaction.getLabel(), transaction.getTransactionAmount(), transaction.getBankType(), dateTimeNow, dateTimeNow, "credit", id_account_receive, transaction.getIdTransfer(), "completed");
                 statement = conn.createStatement();
                 statement.executeUpdate(query1);
                 System.out.println("transaction ok  ✔");
 
                 //mise a jour pour chaque solde du compte
-                String query666 = String.format("update account set balance='%s' where balance='%s' and id_account='%s'", (oldBalanceAccount_1 - transaction.getTransactionAmount()), oldBalanceAccount_1,id_account_sender);
+                String query666 = String.format("update account set balance='%s' where balance='%s' and id_account='%s'", (oldBalanceAccount_1 - transaction.getTransactionAmount()), oldBalanceAccount_1, id_account_sender);
                 statement = conn.createStatement();
                 statement.executeUpdate(query666);
                 System.out.println("SOLDE C1 a JOUR ok  ✔");
 
-                String query6 = String.format("update account set balance='%s' where balance='%s' and id_account='%s'", (oldBalanceAccount_2 + transaction.getTransactionAmount()), oldBalanceAccount_2,id_account_receive);
+                String query6 = String.format("update account set balance='%s' where balance='%s' and id_account='%s'", (oldBalanceAccount_2 + transaction.getTransactionAmount()), oldBalanceAccount_2, id_account_receive);
                 statement = conn.createStatement();
                 statement.executeUpdate(query6);
                 System.out.println("SOLDE C2 a JOUR ok  ✔ ");
@@ -208,7 +208,7 @@ public class TransactionService implements TransactionRepository {
                 System.out.println(e);
             }
 
-        }else {
+        } else {
             System.out.println("transfer error  ");
         }
     }
@@ -220,7 +220,7 @@ public class TransactionService implements TransactionRepository {
         Connection conn = dbConnection.conn_db("wallet_exam");
         Crud crud = new Crud();
         String dateTimeNow = crud.readTimeNow(conn, "now()");
-        int id_account_receive = crud.readIdAccount(conn,accountNumber);
+        int id_account_receive = crud.readIdAccount(conn, accountNumber);
         float oldBalanceAccount_1 = crud.readBalanceById(conn, id_account_sender);
         float oldBalanceAccount_2 = crud.readBalanceById(conn, id_account_receive);
         String oldTimeAccount_1 = crud.readTimeById(conn, id_account_sender);
@@ -232,24 +232,24 @@ public class TransactionService implements TransactionRepository {
 
             try {
                 //insert transaction C1
-                String query = String.format("insert into transaction(label,transaction_amount,bank_type,date_effect,date_registration, transaction_type, id_account,id_transfer,status) values('%s','%s','%s','%s','%s','%s','%s','%s','%s');",transaction.getLabel(),transaction.getTransactionAmount(),transaction.getBankType(),dateTimeNow,dateTimeNow,"debit",id_account_sender,transaction.getIdTransfer(),"completed");
+                String query = String.format("insert into transaction(label,transaction_amount,bank_type,date_effect,date_registration, transaction_type, id_account,id_transfer,status) values('%s','%s','%s','%s','%s','%s','%s','%s','%s');", transaction.getLabel(), transaction.getTransactionAmount(), transaction.getBankType(), dateTimeNow, dateTimeNow, "debit", id_account_sender, transaction.getIdTransfer(), "completed");
                 statement = conn.createStatement();
                 statement.executeUpdate(query);
                 System.out.println("transaction ok ✔ ");
 
                 //insert transaction C2
-                String query1 = String.format("insert into transaction(label,transaction_amount,bank_type,date_effect,date_registration, transaction_type, id_account,id_transfer,status) values('%s','%s','%s','%s','%s','%s','%s','%s','%s');",transaction.getLabel(),transaction.getTransactionAmount(),transaction.getBankType(),dateTimeNow,dateTimeNow,"credit",id_account_receive,transaction.getIdTransfer(),"completed");
+                String query1 = String.format("insert into transaction(label,transaction_amount,bank_type,date_effect,date_registration, transaction_type, id_account,id_transfer,status) values('%s','%s','%s','%s','%s','%s','%s','%s','%s');", transaction.getLabel(), transaction.getTransactionAmount(), transaction.getBankType(), dateTimeNow, dateTimeNow, "credit", id_account_receive, transaction.getIdTransfer(), "completed");
                 statement = conn.createStatement();
                 statement.executeUpdate(query1);
                 System.out.println("transaction ok  ✔");
 
                 //mise a jour pour chaque solde du compte
-                String query666 = String.format("update account set balance='%s' where balance='%s' and id_account='%s'", (oldBalanceAccount_1 - transaction.getTransactionAmount()), oldBalanceAccount_1,id_account_sender);
+                String query666 = String.format("update account set balance='%s' where balance='%s' and id_account='%s'", (oldBalanceAccount_1 - transaction.getTransactionAmount()), oldBalanceAccount_1, id_account_sender);
                 statement = conn.createStatement();
                 statement.executeUpdate(query666);
                 System.out.println("SOLDE C1 a JOUR ok  ✔");
 
-                String query6 = String.format("update account set balance='%s' where balance='%s' and id_account='%s'", (oldBalanceAccount_2 + transaction.getTransactionAmount()), oldBalanceAccount_2,id_account_receive);
+                String query6 = String.format("update account set balance='%s' where balance='%s' and id_account='%s'", (oldBalanceAccount_2 + transaction.getTransactionAmount()), oldBalanceAccount_2, id_account_receive);
                 statement = conn.createStatement();
                 statement.executeUpdate(query6);
                 System.out.println("SOLDE C2 a JOUR ok  ✔ ");
@@ -284,10 +284,87 @@ public class TransactionService implements TransactionRepository {
                 System.out.println(e);
             }
 
-        }else {
+        } else {
             System.out.println("transfer error  ");
         }
 
+    }
+
+    @Override
+    public void saveTransferOtherAccount(int id, Transaction transaction, int id_account_sender, String accountNumber) {
+        Statement statement;
+        DbConnection dbConnection = new DbConnection();
+        Connection conn = dbConnection.conn_db("wallet_exam");
+        Crud crud = new Crud();
+        String dateTimeNow = crud.readTimeNow(conn, "now()");
+        int id_account_receive = crud.readIdAccount(conn, accountNumber);
+        float oldBalanceAccount_1 = crud.readBalanceById(conn, id_account_sender);
+        float oldBalanceAccount_2 = crud.readBalanceById(conn, id_account_receive);
+        String oldTimeAccount_1 = crud.readTimeById(conn, id_account_sender);
+        String oldTimeAccount_2 = crud.readTimeById(conn, id_account_receive);
+
+
+        if (id_account_sender != id_account_receive) {
+
+
+            try {
+                //insert transaction C1
+                String query = String.format("insert into transaction(label,transaction_amount,bank_type,date_effect,date_registration, transaction_type, id_account,id_transfer,status) values('%s','%s','%s','%s','%s','%s','%s','%s','%s');", transaction.getLabel(), transaction.getTransactionAmount(), transaction.getBankType(), dateTimeNow, dateTimeNow, "debit", id_account_sender, transaction.getIdTransfer(), "completed");
+                statement = conn.createStatement();
+                statement.executeUpdate(query);
+                System.out.println("transaction ok ✔ ");
+
+                // insert transaction C2
+                String query1 = String.format("insert into transaction(label,transaction_amount,bank_type,date_effect,date_registration, transaction_type, id_account,id_transfer,status) values('%s','%s','%s','%s','%s','%s','%s','%s','%s');", transaction.getLabel(), transaction.getTransactionAmount(), transaction.getBankType(), dateTimeNow, dateTimeNow, "credit", id_account_receive, transaction.getIdTransfer(), "completed");
+                statement = conn.createStatement();
+                statement.executeUpdate(query1);
+                System.out.println("transaction ok  ✔");
+
+                //mise a jour pour chaque solde du compte
+                String query666 = String.format("update account set balance='%s' where balance='%s' and id_account='%s'", (oldBalanceAccount_1 - transaction.getTransactionAmount()), oldBalanceAccount_1, id_account_sender);
+                statement = conn.createStatement();
+                statement.executeUpdate(query666);
+                System.out.println("SOLDE C1 a JOUR ok  ✔");
+
+                // String query6 = String.format("update account set balance='%s' where balance='%s' and id_account='%s'", (oldBalanceAccount_2 + transaction.getTransactionAmount()), oldBalanceAccount_2, id_account_receive);
+                // statement = conn.createStatement();
+                // statement.executeUpdate(query6);
+                // System.out.println("SOLDE C2 a JOUR ok  ✔ ");
+
+                //MISE A JOUR HEURE DU SOLDE
+                String query3 = String.format("update account set    date_heure='%s' where    date_heure='%s'", dateTimeNow, oldTimeAccount_1);
+                statement = conn.createStatement();
+                statement.executeUpdate(query3);
+                System.out.println("Heure C1 a jour ok   ✔");
+
+                // String query33 = String.format("update account set    date_heure='%s' where    date_heure='%s'", dateTimeNow, oldTimeAccount_2);
+                // statement = conn.createStatement();
+                // statement.executeUpdate(query33);
+                //System.out.println("Heure  C2 a jour ok   ✔");
+
+                //solde history
+                String query4 = String.format("insert into transaction_history(last_balance,date_registration,id_account) values('%s','%s','%s');", oldBalanceAccount_1, oldTimeAccount_1, id_account_sender);
+                statement = conn.createStatement();
+                statement.executeUpdate(query4);
+                System.out.println("solde_history ok  ✔");
+
+                // String query7 = String.format("insert into transaction_history(last_balance,date_registration,id_account) values('%s','%s','%s');", oldBalanceAccount_2, oldTimeAccount_2, id_account_receive);
+                // statement = conn.createStatement();
+                // statement.executeUpdate(query7);
+                // System.out.println("solde_history ok  ✔ ");
+
+                //tranfer_history
+                String query8 = String.format("insert into transfer_history(id_send,id_receive,date_registration) values('%s','%s','%s');", id_account_sender, id_account_receive, dateTimeNow);
+                statement = conn.createStatement();
+                statement.executeUpdate(query8);
+                System.out.println("tranfer_history ok  ✔");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
+        } else {
+            System.out.println("transfer error  ");
+        }
     }
 
     @Override
@@ -299,12 +376,12 @@ public class TransactionService implements TransactionRepository {
         int idTransaction = crud.idTransaction(conn);
         int idTransfer = crud.idTransfer(conn);
         try {
-            String query = String.format("update transaction set id_transfer='%s' where id_transaction='%s' ;", idTransfer,idTransaction);
+            String query = String.format("update transaction set id_transfer='%s' where id_transaction='%s' ;", idTransfer, idTransaction);
             statement = conn.createStatement();
             statement.executeUpdate(query);
             System.out.println("merci ✔");
 
-            String query1 = String.format("update transaction set id_transfer='%s' where id_transaction='%s' ;",idTransfer,idTransaction -1);
+            String query1 = String.format("update transaction set id_transfer='%s' where id_transaction='%s' ;", idTransfer, idTransaction - 1);
             statement = conn.createStatement();
             statement.executeUpdate(query1);
             System.out.println("merci ✔");

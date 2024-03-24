@@ -72,5 +72,21 @@ public class TransactionController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PostMapping("/TransferOtherAccount/money/{id_account_sender}/{accountNumber}")
+
+    public ResponseEntity<Void> saveTransferOtherAccount(@RequestBody Transaction transaction, @PathVariable int id_account_sender, @PathVariable String accountNumber) {
+        Crud crud = new Crud();
+        DbConnection dbConnection = new DbConnection();
+        Connection conn = dbConnection.conn_db("wallet_exam");
+        String accountNumberSender = crud.readAccountNumber(conn,id_account_sender);
+        if (accountNumberSender != accountNumber) {
+            transactionService.saveTransferOtherAccount(1,transaction,id_account_sender,accountNumber);
+            transactionService.saveIdTransfer();
+        }else {
+            System.out.println("error transfer");
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
 }
