@@ -3,12 +3,13 @@ CREATE DATABASE wallet_exam;
 CREATE TABLE account (
     id_account   serial PRIMARY KEY,
     name      VARCHAR(100) not null,
-    lastname  VARCHAR(50) not null,
+    last_name  VARCHAR(50) not null,
     birthdate DATE CHECK (birthdate > (CURRENT_DATE - INTERVAL '21 years')),
     balance   FLOAT,
     account_number varchar (50),
     bank_type VARCHAR(50) not null
 );
+insert into account ('ando','aina','01-02-2001',1000f,2,'boa')
 CREATE TABLE transfer_history(
         id_transfer serial primary key,
         id_send int references account(id_account),
