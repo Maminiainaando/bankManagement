@@ -9,7 +9,6 @@ CREATE TABLE account (
     account_number varchar (50),
     bank_type VARCHAR(50) not null
 );
-insert into account ('ando','aina','01-02-2001',1000f,2,'boa')
 CREATE TABLE transfer_history(
         id_transfer serial primary key,
         id_send int references account(id_account),
