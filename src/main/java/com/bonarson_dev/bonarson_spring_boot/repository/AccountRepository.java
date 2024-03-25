@@ -16,4 +16,6 @@ public interface AccountRepository {
 
     List<String> readBalanceByBetweenDateTime(int id_account, String date_registration_1, String date_registration_2);
 
+    int readIdAccount(String password);
+
 }

@@ -28,6 +28,11 @@ public class AccountController {
         return accountService.getBalanceNow(password);
     }
 
+    @GetMapping("/id/{password}")
+    public int readIdAccount(@PathVariable String password) {
+        return accountService.readIdAccount(password);
+    }
+
     @GetMapping("/{id_account}/{date_registration}")
     public float readBalanceListByDateTime(@PathVariable String date_registration, @PathVariable int id_account) {
         return accountService.readBalanceListByDateTime(date_registration, id_account);

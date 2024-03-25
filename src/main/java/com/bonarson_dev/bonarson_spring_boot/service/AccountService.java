@@ -152,5 +152,30 @@ public class AccountService implements AccountRepository {
         }
         return balances;
     }
+
+    @Override
+    public int readIdAccount(String password) {
+        Statement statement;
+        DbConnection dbConnection = new DbConnection();
+        Connection conn = dbConnection.conn_db("wallet_exam");
+        ResultSet rs = null;
+        int id = 0;
+
+        try {
+            String query = String.format(" select id_account from account where   password='%s'",password);
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+
+                id = rs.getInt("id_account");
+
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return id;
+    }
 }
 
