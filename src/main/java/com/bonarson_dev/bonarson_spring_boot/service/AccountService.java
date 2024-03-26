@@ -30,7 +30,7 @@ public class AccountService implements AccountRepository {
         Crud crud = new Crud();
         String dateTimeNow = crud.readTimeNow(conn, "now()");
         try {
-            String query = String.format("insert into account(name, lastname, birthdate, balance, date_heure, account_number, bank_type,password) values ('%s', '%s', '%s', %s, '%s', '%s', '%s','%s');", account.getName(), account.getLastname(), account.getBirthDate(), 0, dateTimeNow, account.getAccountNumber(), account.getBankType(),account.getPassword());
+            String query = String.format("insert into account(name, lastname, birthdate, balance, date_heure, account_number, bank_type,password) values ('%s', '%s', '%s', %s, '%s', '%s', '%s','%s');", account.getName(), account.getLastname(), account.getBirthDate(), 0, dateTimeNow, account.getAccountNumber(), account.getBankType(), account.getPassword());
             statement = conn.createStatement();
             statement.executeUpdate(query);
 
@@ -49,7 +49,7 @@ public class AccountService implements AccountRepository {
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery("select * from account ")) {
             while (resultSet.next()) {
-                accounts.add(new Account(resultSet.getString("name"), resultSet.getString("lastname"), resultSet.getString("birthdate"), resultSet.getFloat("balance"), resultSet.getString("date_heure"), resultSet.getString("account_number"), resultSet.getString("bank_type"),resultSet.getString("password")));
+                accounts.add(new Account(resultSet.getString("name"), resultSet.getString("lastname"), resultSet.getString("birthdate"), resultSet.getFloat("balance"), resultSet.getString("date_heure"), resultSet.getString("account_number"), resultSet.getString("bank_type"), resultSet.getString("password")));
             }
 
         } catch (SQLException e) {
@@ -80,12 +80,12 @@ public class AccountService implements AccountRepository {
             System.out.println("update account date_time ok  ✔ ");
 
 
-            String query = String.format(" select * from account where password='%s'  ",password);
+            String query = String.format(" select * from account where password='%s'  ", password);
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
             while (rs.next()) {
 
-                account.add(new Account(rs.getString("name"), rs.getString("lastname"), rs.getString("birthdate"), rs.getFloat("balance"), rs.getString("date_heure"), rs.getString("account_number"), rs.getString("bank_type"),rs.getString("password")));
+                account.add(new Account(rs.getString("name"), rs.getString("lastname"), rs.getString("birthdate"), rs.getFloat("balance"), rs.getString("date_heure"), rs.getString("account_number"), rs.getString("bank_type"), rs.getString("password")));
                 System.out.println("select account ok ✔ ");
             }
 
@@ -131,14 +131,14 @@ public class AccountService implements AccountRepository {
 
     @Override
     public List<String> readBalanceByBetweenDateTime(int id_account, String date_registration_1, String date_registration_2) {
-        List<String>balances = new ArrayList<>();
+        List<String> balances = new ArrayList<>();
         Statement statement;
         DbConnection dbConnection = new DbConnection();
         Connection conn = dbConnection.conn_db("wallet_exam");
         ResultSet rs = null;
         float h = 0;
         try {
-            String query = String.format(" select last_balance from transaction_history where id_account='%s' and transaction_history.date_registration between  '%s' and '%s' ",id_account, date_registration_1, date_registration_2);
+            String query = String.format(" select last_balance from transaction_history where id_account='%s' and transaction_history.date_registration between  '%s' and '%s' ", id_account, date_registration_1, date_registration_2);
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
             while (rs.next()) {
@@ -162,7 +162,7 @@ public class AccountService implements AccountRepository {
         int id = 0;
 
         try {
-            String query = String.format(" select id_account from account where   password='%s'",password);
+            String query = String.format(" select id_account from account where   password='%s'", password);
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
             while (rs.next()) {
@@ -176,6 +176,16 @@ public class AccountService implements AccountRepository {
             System.out.println(e);
         }
         return id;
+    }
+
+    @Override
+    public String readAccountNumberModelX() {
+        DbConnection dbConnection = new DbConnection();
+        Connection conn = dbConnection.conn_db("wallet_exam");
+        Crud crud = new Crud();
+        int idAccountEnd = crud.readIdAccountEnd(conn);
+        String accountNumberModelX = crud.numberAccountModelX(idAccountEnd);
+        return accountNumberModelX;
     }
 }
 

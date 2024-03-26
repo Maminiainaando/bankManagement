@@ -25,7 +25,32 @@ public class Crud {
 
     }
 
-    public String readTimeById(Connection conn,  int idaccount) {
+    //Model of numberAccount a bank X
+
+    public String numberAccountModelX(int idAccount) {
+        String numberModelX = "00006000040" + idAccount + "01" + idAccount*2;
+        return numberModelX;
+    }
+    public int readIdAccountEnd(Connection conn) {
+        Statement statement;
+        ResultSet rs = null;
+        int id = 0;
+        try {
+            String query = String.format(" select id_account from account order by id_account desc limit 1; ");
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                id = rs.getInt("id_account");
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+            e.getMessage();
+        }
+        return id;
+    }
+
+    public String readTimeById(Connection conn, int idaccount) {
         Statement statement;
         ResultSet rs = null;
         String h = " ";
@@ -45,7 +70,8 @@ public class Crud {
 
         return h;
     }
-    public String readTimeByPassword(Connection conn,  String password) {
+
+    public String readTimeByPassword(Connection conn, String password) {
         Statement statement;
         ResultSet rs = null;
         String h = " ";
@@ -65,19 +91,20 @@ public class Crud {
 
         return h;
     }
-    public String readAccountNumber(Connection conn,int idAccount){
+
+    public String readAccountNumber(Connection conn, int idAccount) {
         Statement statement;
         ResultSet rs = null;
         String accountNumber = " ";
-        try{
+        try {
             String query = String.format(" select account_number from account where id_account='%s' ", idAccount);
-             statement = conn.createStatement();
-             rs= statement.executeQuery(query);
-             while (rs.next()){
-                 accountNumber =rs.getString("account_number");
-             }
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                accountNumber = rs.getString("account_number");
+            }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             e.getMessage();
         }
@@ -86,31 +113,12 @@ public class Crud {
 
     //pour obtenir le solde account par id
 
-    public float readBalanceById(Connection conn,  int idaccount) {
+    public float readBalanceById(Connection conn, int idaccount) {
         Statement statement;
         ResultSet rs = null;
         float q = 0;
         try {
-            String query = String.format(" select balance from account where  id_account='%s' ",  idaccount);
-            statement = conn.createStatement();
-            rs = statement.executeQuery(query);
-            while (rs.next()) {
-                q = rs.getFloat("balance");
-
-            }
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-        return q;
-    }
-    public float readBalanceByPassword(Connection conn,  String password) {
-        Statement statement;
-        ResultSet rs = null;
-        float q = 0;
-        try {
-            String query = String.format(" select balance from account where  password='%s' ",password);
+            String query = String.format(" select balance from account where  id_account='%s' ", idaccount);
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
             while (rs.next()) {
@@ -125,19 +133,39 @@ public class Crud {
         return q;
     }
 
-    public int readIdAccount(Connection conn , String accountNumber){
+    public float readBalanceByPassword(Connection conn, String password) {
         Statement statement;
         ResultSet rs = null;
-        int id =0;
-        try{
-            String query = String.format(" select id_account from account where  account_number='%s' ",  accountNumber);
+        float q = 0;
+        try {
+            String query = String.format(" select balance from account where  password='%s' ", password);
             statement = conn.createStatement();
-            rs= statement.executeQuery(query);
-            while (rs.next()){
-                id=rs.getInt("id_account");
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                q = rs.getFloat("balance");
+
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return q;
+    }
+
+    public int readIdAccount(Connection conn, String accountNumber) {
+        Statement statement;
+        ResultSet rs = null;
+        int id = 0;
+        try {
+            String query = String.format(" select id_account from account where  account_number='%s' ", accountNumber);
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                id = rs.getInt("id_account");
+            }
+
+        } catch (Exception e) {
             System.out.println(e);
             e.getMessage();
         }
@@ -180,7 +208,6 @@ public class Crud {
         }
         return id_transfer;
     }
-
 
 
 }

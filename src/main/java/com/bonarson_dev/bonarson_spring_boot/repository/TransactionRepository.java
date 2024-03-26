@@ -13,5 +13,4 @@ public interface TransactionRepository {
     void saveTransfer(int id,Transaction transaction, int id_account_sender , String accountNumber);
     void saveTransferOtherAccount(int id,Transaction transaction, int id_account_sender , String accountNumber);
     void saveIdTransfer();
-
 }

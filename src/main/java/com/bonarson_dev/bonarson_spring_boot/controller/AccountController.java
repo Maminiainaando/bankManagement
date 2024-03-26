@@ -33,6 +33,13 @@ public class AccountController {
         return accountService.readIdAccount(password);
     }
 
+    @GetMapping("/accountNumberModelX")
+
+    public String readAccountNumberModelX() {
+        return accountService.readAccountNumberModelX();
+
+    }
+
     @GetMapping("/{id_account}/{date_registration}")
     public float readBalanceListByDateTime(@PathVariable String date_registration, @PathVariable int id_account) {
         return accountService.readBalanceListByDateTime(date_registration, id_account);

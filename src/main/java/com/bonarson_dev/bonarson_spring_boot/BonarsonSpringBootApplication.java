@@ -22,6 +22,10 @@ public class BonarsonSpringBootApplication {
         Connection conn =dbConnection.conn_db("wallet_exam");
         Crud crud = new Crud();
         System.out.println(crud.readBalanceById(conn, 1));
+        System.out.println(crud.numberAccountModelX(14));
+        int idAccount = crud.readIdAccountEnd(conn);
+        System.out.println(crud.numberAccountModelX(idAccount));
+
 
 
     }
