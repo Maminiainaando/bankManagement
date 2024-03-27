@@ -30,7 +30,11 @@ public class BonarsonSpringBootApplication {
         System.out.println(crud.numberAccountModelX(14));
         int idAccount = crud.readIdAccountEnd(conn);
         System.out.println(crud.numberAccountModelX(idAccount));
-
+        System.out.println("listIdAccess");
+        System.out.println(crud.listOfIdAccountAccess(conn));
+        List<Integer> id_List = crud.listOfIdAccountAccess(conn);
+        int a = 4;
+        System.out.println(id_List.contains(a));
 
 
     }

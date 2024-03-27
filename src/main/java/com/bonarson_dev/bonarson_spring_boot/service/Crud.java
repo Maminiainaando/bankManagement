@@ -2,7 +2,11 @@ package com.bonarson_dev.bonarson_spring_boot.service;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Crud {
     public String readTimeNow(Connection conn, String now) {
@@ -207,6 +211,23 @@ public class Crud {
             System.out.println(e);
         }
         return id_transfer;
+    }
+
+    public List<Integer> listOfIdAccountAccess(Connection conn) {
+        Statement statement;
+        ResultSet rs = null;
+        List<Integer> id = new ArrayList<>();
+        try {
+            String query = "SELECT id_account FROM account_access";
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                id.add(rs.getInt("id_account"));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return id;
     }
 
 
