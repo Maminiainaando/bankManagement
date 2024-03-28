@@ -137,6 +137,125 @@ public class Crud {
         return q;
     }
 
+    public float balanceLoans(Connection conn, int idAccount){
+        Statement statement;
+        ResultSet rs = null;
+        float q = 0;
+        try {
+            String query = String.format(" select balance_loans from loans where id_account ='%s'; ", idAccount);
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                q = rs.getFloat("balance_loans");
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return q;
+
+    }
+
+    public float balanceRepayment(Connection conn, int idAccount){
+        Statement statement;
+        ResultSet rs = null;
+        float q = 0;
+        try {
+            String query = String.format(" select balance_repayment from loans where id_account ='%s'; ", idAccount);
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                q = rs.getFloat("balance_repayment");
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return q;
+
+    }
+    public float percentage(Connection conn,int idAccount){
+        Statement statement;
+        ResultSet rs = null;
+        float q = 0;
+        try {
+            String query = String.format(" select percentage from loans where id_account ='%s'; ", idAccount);
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                q = rs.getFloat("percentage");
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return q;
+    }
+    public  String paymentMethode(Connection conn,int idAccount){
+        Statement statement;
+        ResultSet rs = null;
+        String q = " ";
+        try {
+            String query = String.format(" select payment_methode from loans where id_account ='%s'; ", idAccount);
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                q = rs.getString("payment_methode");
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return q;
+    }
+    public String dateRegistrationLoans(Connection conn,int idAccount){
+        Statement statement;
+        ResultSet rs = null;
+        String q = " ";
+        try {
+            String query = String.format(" select  date_registration from loans where id_account ='%s'; ", idAccount);
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                q = rs.getString("date_registration");
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return q;
+    }
+    public float differenceBetweenBalanceLoansAndBalanceRepayment(Connection conn,int  idAccount){
+        Statement statement;
+        ResultSet rs = null;
+        float q = 0;
+        try {
+            String query = String.format(" select balance_loans - balance_repayment from loans where id_account ='%s'; ", idAccount);
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                q = rs.getFloat("?column?");
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return q;
+
+    }
+
     public float readBalanceByPassword(Connection conn, String password) {
         Statement statement;
         ResultSet rs = null;
@@ -229,6 +348,25 @@ public class Crud {
         }
         return id;
     }
+
+    public List<Integer> listOfIdAccountInLoans(Connection conn) {
+        Statement statement;
+        ResultSet rs = null;
+        List<Integer> id = new ArrayList<>();
+        try {
+            String query = "SELECT id_account FROM loans";
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                id.add(rs.getInt("id_account"));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return id;
+    }
+
+
 
 
 }

@@ -8,6 +8,4 @@ import java.util.List;
 public interface AccountAccessRepository {
     List<AccountAccess> getAllAccountAccess();
     void addAccountAccess(int id, AccountAccess accountAccess);
-
-
 }

@@ -35,6 +35,19 @@ public class BonarsonSpringBootApplication {
         List<Integer> id_List = crud.listOfIdAccountAccess(conn);
         int a = 4;
         System.out.println(id_List.contains(a));
+        System.out.println("difference balance ");
+        System.out.println("============");
+        System.out.println(crud.differenceBetweenBalanceLoansAndBalanceRepayment(conn, 1)==0);
+        System.out.println(crud.listOfIdAccountInLoans(conn));
+        List<Integer>idAccountListInLoans = crud.listOfIdAccountInLoans(conn);
+        int b = 1;
+        System.out.println(idAccountListInLoans.contains(b));
+        System.out.println("percentage");
+        System.out.println(crud.percentage(conn, 1));
+        System.out.println("payment_methode");
+        System.out.println(crud.paymentMethode(conn, 1));
+        System.out.println(" date_registration in loans");
+        System.out.println(crud.dateRegistrationLoans(conn, 1));
 
 
     }
